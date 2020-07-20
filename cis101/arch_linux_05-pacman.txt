@@ -1,0 +1,123 @@
+# Applications
+
+This article details how to manage applications using  pacman, Arch Linux's package manager. In addition, packages for common application are provided.
+
+## pacman
+
+List of common pacman options and explanations. Use of "pckg" represent the package to be managed.
+
+* pacman -Q pckg - displays installed packages
+* pacman -Ql pckg - lists all packages
+* pacman -Qm - lists manually installed packages
+* pacman -Rns pckg - removes package, its dependencies and configuration files
+* pacman -S pckg - install package
+* pacman -Si pckg - shows package information
+* pacman -Ss name - searches packages where name is a string
+* pacman -Sy - update pacman database, -Syy force update
+* pacman -Syu - complete package upgrades
+* pacman -U pckg.tar.xz - installs a package from a file
+
+The most common options are install (S), search (Ss), update (Syu), and remove (Rns).
+
+## Install Mozilla Firefox Internet Browser
+
+Use pacman and update the local pacman database, then install Firefox. Note the use of "-Sy" need only done if there are packages updates which obsoletes packages in the existing pacman database. As a habit, advise "pacman -Sy" if it has been more than a day and installing or updating packages.
+
+```
+sudo pacman -Sy
+sudo packman -S firefox
+```
+
+Firefox is now available in applications.
+
+---
+
+* Note *
+
+When installing packages and receiving 404 errors, it may indicate the package doesn't exist due to an update. Refresh the pacman database using `sudo pacman -Sy`.
+
+---
+
+## Additional applications
+
+The list format below gives the application category, application name, and application package. Use pacman to install each application. Review the syntax for firefox above as a reminder.
+
+	Category
+		Applicaton Name: package-name
+
+Please install the following applications using pacman. Skip items between "( )" for now. We will install them using alternatives to pacman, later.
+
+------------------------------------------------------------------------------
+Calculator
+	Galculator: galculator
+
+CD/DVD Image Burning
+	xfburn: xfce4-goodies <-- we already installed
+
+Developer tools
+	Git: git
+	Common developer tools: base-devel
+	Sublime Text (IDE): ??? 
+
+	Both git and base-devel are needed to use the Arch User Repository (AUR).
+
+eBook Manager
+	(Calibre: calibre)
+
+Games
+	Steam: installing using an alternative method!
+	
+
+Internet browser
+	Firefox: firefox <-- we did this in the example above, but install the Firefox extentions.
+		Firefox extensions: firefox-ublock-origin firefox-umatrix firefox-extension-https-everywhere firefox-decentraleyes
+	Chromium: chromium
+
+Image editor
+	GIMP: gimp
+	
+Image viewer:
+	Ristretto Image Viewer: xfce4-goodies <-- we already installed
+
+Music editor
+	Audacity: audacity
+
+Music meta-tag editor
+	(Puddletag: ???)
+
+Music player
+	DeaDBeeF: deadbeef
+	Parole: xfce4-goodies <-- we already installed
+
+Notes
+	Notes: xfce4-goodies <-- we already installed
+	
+Office suite - word processor, spreadsheet, diagrams, presentation, and other business productivity software.
+	LibreOffice: libreoffice-fresh
+
+Recording (Audio/Video)
+	(OBS Studio: obs-studio)
+
+Themes:
+	ARC: arc-gtk-theme, arc-icon-theme
+	Deepin: deepin-gtk-theme, deepin-icon-them
+	Faba: faba-icon-theme
+	Moka: moka-icon-theme <-- we already installed
+	Papirus: papirus-icon-theme (derived from paper theme)
+
+Text editor
+	Mousepad:  <-- we already installed
+
+Timer
+	XFCE Timer: xfce4-goodies <-- we already installed
+		Remember to create you timers first!
+
+Video editor
+	(Shotcut: shotcut)
+
+Video player
+	Kodi: kodi
+	Parole: xfce4-goodies <-- we already installed
+------------------------------------------------------------------------------
+
+Done!

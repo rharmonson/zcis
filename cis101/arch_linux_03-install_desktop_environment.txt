@@ -1,0 +1,50 @@
+# Install Desktop Environment
+
+Log on to Arch Linux using your user account, zeth.
+
+## Display driver
+
+Identify which display driver to use.
+
+`sudo lspci | grep -e VGA -e 3D`
+
+If using VirtualBox and its VMSVGA Graphics Controller, lspci will result with the following:
+
+`VGA compatible controller: VMware SVGA II Adapter`
+
+Which is supported by the xf86-video-vmware driver and should be installed. If not, install using `sudo pacman -S xf86-video-vmware`.
+
+Reminder: during Arch Linux Chapter 1, we installed virtualbox-guest-utils and xf86-video-vmware as part of the base install.
+
+## Install packages.
+
+```
+sudo pacman -S xorg xfce4 xfce4-goodies lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings network-manager-applet gvfs
+sudo systemctl enable lightdm pulseaudio pulseaudio-alsa pavucontrol
+```
+
+Before enabling the DE on boot, test using startxfce4.
+
+`startxfce4`
+
+If you successfully launch xfce, then open a terminal using the bottom dock and use systemctl to enable graphical.
+
+`sudo systemctl set-default graphical.target`
+
+Select your user name in the upper-right corner --> Log Out --> Shut Down
+
+## Done!
+
+Create snapshot "aftDesktopEnvironment"
+
+---
+
+* Did you know? *
+
+The checkmark option "Save session for future logins" is used when making user customization within the DE. For example, if you select a new background image, you must enable "Save session for future logins" for it to persist or save after reboot. This is very useful when customizing the DE then deciding you want to return to the prior settings. Just uncheck the feature on "Log Out."
+
+---
+
+## References
+https://wiki.archlinux.org/index.php/Xorg#Driver_installation
+https://wiki.archlinux.org/index.php/Xfce

@@ -1,0 +1,113 @@
+=====
+audio: pulseaudio pulseaudio-alsa pavucontrol
+steam?:  lib32-libpulse lib32-alsa-plugins
+=====
+
+# Alternatives to pacman
+
+## Flatpak
+
+Flatpak is an alternative to pacman where applications are abstracted and partially sandboxed. This permits an application flatpak run on differing Linux distributions.
+
+References:
+https://wiki.archlinux.org/index.php/Flatpak
+
+### Install flatpak
+
+Open a shell and execute
+
+`sudo pacman -S flatpak`
+
+When prompted to select "xdg-desktop-portal-impl" accept the default for "gtk" and "y" for "Proceed with installation."
+
+After the installation, close the shell and a new shell. This is to inherit the new global environment variables.
+
+Install the flatpak repository flathub.
+
+```
+sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+```
+
+### Using flatpak
+
+To obtain and update "appstream" information from flathub, use the "update" option.
+
+`sudo flatpak update`
+
+After the update, you can query or search the flathub using "search."
+
+`sudo flatpak search libreoffice`
+
+To list installed flatpaks, use the "list" option.
+
+`sudo flatpak list`
+
+We will use the "install" option next and the complete list of options and descriptions are found using "man flatpak."
+
+### Steam
+
+Steam is not available using pacman for it is not in the official package repositories. One option to install Steam is to use flatpak. The steps to install are as follows--go ahead and install it.
+
+Open a shell and maximize, so you can see flatpak's output.
+
+```
+sudo flatpak update
+sudo flatpak search steam <-- Note "Steam" and its App ID 
+sudo flatpak install com.valvesoftware.Steam
+```
+
+Respond with "y" for "Use this remote" and "Do you want to install."
+
+Steam is now ready for use!
+
+https://wiki.archlinux.org/index.php/steam#Installation	
+https://www.archlinux.org/packages/multilib/x86_64/steam-native-runtime/
+https://wiki.archlinux.org/index.php/Steam/Troubleshooting#Steam_runtime
+
+## User provided packages (AUR)
+
+AUR stands for Arch User Repository. Archlinux.org communicates on thier AUR webpage the following warning:
+
+"DISCLAIMER: AUR packages are user produced content. Any use of the provided files is at your own risk."
+
+Use AUR only if an alternative package or program is not available from the official repository using pacman or flatpak.
+
+Before proceeding, you must have git and base-devel installed. Both were installed as part of our earlier activities.
+
+### yay
+
+yay plays the same role as pacman, but it supports AUR. In fact, it is found in AUR.
+
+To install yay, its source code must be downloaded using git then compiled using the base-devel tools.
+
+```
+mkdir ~/gitcode
+cd ~/gitcode
+git clone https://aur.archlinux.org/yay.git	
+cd yay
+makepkg -si
+```
+
+When prompted, provide sudo credentials.
+Respond "y" to "Proceed with installation," twice.
+
+yay uses the same syntax as pacman, generally, and will search and update both pacman and yay packages, e.g. yay -Syu. See yay man pages using "man yay" for all options.
+
+Reference:
+https://aur.archlinux.org
+
+### Minecraft
+
+Games
+	https://wiki.archlinux.org/index.php/List_of_games
+	Minecraft: minecraft-launcher
+
+Using yay install Minecraft.
+
+`yay -S minecraft-launcher`
+
+### Flat theme
+
+Install the Flat theme using yay.
+
+`yay -S flat-remix flat-remix-gtk`

@@ -1,0 +1,224 @@
+# How to install Arch Linux
+
+Guiding principle when working with complex systems: KISS; Keep It Simple, Stupid!
+
+---
+
+* VirtualBox *
+
+This series of articles uses VirtualBox to install Arch Linux as a virtual machine. If you are unfamiliar with VirtualBox, advise searching for blog and youtube tutorials. Also, it has a manual found at https://www.virtualbox.org/manual/.
+
+If using Linux, advise installing the VirtualBox package for your Linux distribution.
+
+For Windows, download and install directly from Oracle.
+
+https://www.virtualbox.org/
+
+---
+
+## Obtain Arch Linux installer
+
+Download the installer using bittorrent from https://www.archlinux.org/download/. If installing on a virtual machine, use the iso file directly, otherwise, use etcher or dd to write to a USB stick.
+
+Etcher
+https://www.balena.io/etcher/ 
+
+Using `dd`.
+
+```
+lsblk (<-- identify the flash device)
+dd bs=4M if=path/to/archlinux.iso of=/dev/sdx status=progress oflag=sync
+```
+
+Boot using the media into a live Arch Linux.
+
+## BIOS or UEFI?
+
+If efivars does not exist, indicates probable BIOS system board.
+
+`ls /sys/firmeware/efi/efivars`
+
+## Keyboard Map
+
+Accept the default keyboard map, US.
+
+## Network Interface
+
+If using DHCP, connect to your network, then test with ping.
+
+```
+ip link
+ping archlinux.org
+```
+
+Use ctrl+c to quit ping.
+
+# System clock
+
+`timedatectl set-ntp true`
+
+## Create partitions
+
+Use `fdisk -l` view current devices. Using device sda as an example, we will create the following partitions for a BIOS installation (versus UEFI).
+
+Mount	Device		Description	Size
+--------------------------------------
+none	/dev/sda1	BIOS		1M
+/		/dev/sda2	root		25G
+[swap]	/dev/sda3	swap		4G
+/home	/dev/sda4	home		10G
+
+When using fdisk, use "m" to explore fdisk's options. Execute the following commands in sequence to create the partitions as described above.
+
+```
+fdisk /dev/sda
+fdisk /dev/sda
+n
+p
+1
+default first sector
++1M
+n
+p
+2
+default first sector
++25G
+n
+p
+3
+default first sector
++4G
+t
+3
+82
+n
+p
+(assumes 4 for it is the last available primary partition)
+default first sector
++10G
+w
+```
+
+"w" is responsible for saving our work. If you make a mistake "q" to quit without saving.
+
+## Format partitions
+
+```
+mkfs.ext4 /dev/sda1
+mkfs.ext4 /dev/sda2
+mkfs.ext4 /dev/sda4
+mkswap /dev/sda3
+swapon /dev/sda3
+```
+
+## Mount partitions
+
+```
+mount /dev/sda2 /mnt
+mkdir /mnt/home
+mount /dev/sda4 /mnt/home
+```
+
+## Install
+
+`pacstrap /mnt base linux linux-firmware iproute2 iputils man-db man-pages nano networkmanager reflextor texinfo virtualbox-guest-utils xf86-video-vmware`
+
+## fstab
+
+`genfstab -U /mnt >> /mnt/etc/fstab
+
+## chroot
+
+`arch-chroot /mnt`
+
+## Time zone
+
+```
+ln -sf /usr/share/zoneinfo/US/Los_Angeles /etc/localtime
+hwclock --systohc
+```
+
+## Localization
+
+Update "locale.gen" to use "en_US.UTF8 UTF-8" by removing "#."
+
+```
+nano /etc/locale.gen
+en_US.UTF-8 UTF-8
+```
+
+## Network configuration
+
+Using hostname cis101, complete the following.
+
+```
+echo "cis101" >> /etc/hostname
+```
+
+Also, update /etc/hosts
+
+```
+nano /etc/hosts
+```
+
+Update to have
+
+```
+127.0.0.1	localhost
+::1			localhost
+127.0.1.1	cis101.localdomain	cis101
+```
+
+## NetworkManager
+
+`systemctl enable NetworkManager`
+
+## reflector
+
+```
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+reflector --country US --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+```
+
+## initramfs
+
+```
+mkinitcpio -P
+```
+
+## root password
+
+```
+passwd root
+```
+
+## Boot loader
+
+Install and configure grub boot loader.
+
+```
+pacman -S grub
+grub-install /dev/sda
+grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+## Complete install
+
+Exit chroot, unmount, and shutdown.
+
+```
+exit
+umount -r /mnt/home
+umount -r /mnt
+poweroff
+```
+
+## Done!
+
+After poweroff, remove Arch Linux installation media and take a snap of the virtual machine prior to moving to the next lesson.
+
+This is a good time to enable copy+paste for VirtualBox. Using Oracle VM VirtualBox Manager, select the Arch Linux guest, select the elipsis which is represented as three vertical dots, to the right of the guest, "Details", then "Settings." Moving forward we will use the following notation when decribing the use of the mouse in a graphical user interface (GUI).
+
+Arch Linux guest --> (elipsis) --> Details --> Settings
+
+In the Settings Windows, General --> Advance, select the drop down box to select Bidrirection for Shared Clipboard. This will permit copy, cut, and paste features using ctrl+c, ctrl+x, and ctrl+v between you computer and the Arch Linux guest for many programs. The terminal or shell uses the variations ctrl+shift+c, ctrl+shift+x, and ctrl+shift+v.

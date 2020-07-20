@@ -1,0 +1,148 @@
+# Customize Desktop Environment
+
+In this lesson, we will customize our newly installed XFCE4 Desktop Environment (DE).
+
+## Terminal
+
+Before we start, we need to identify our Terminal Emulator which is our command line used for executing programs. At the bottom of the screen, we have a dock with icons. Go ahead and click on them to see what they do.
+
+In order from left to right, the icons are:
+
+1. Display Desktop - minimizes applications windows
+1. Terminal
+1. File Manager also known as Thunar or Thunar File Manager
+1. Web Browser - will will install one later
+1. Find or Application Finder
+1. Home - list of location to open Thunar
+
+The second icon from the left that looks like a black square with ">_" is XFCE4 Terminal Emulator. It is the application used to execute commands just like we did before installing XFCE4 DE. Prior to the DE, we were presented with the default "shell" on login. The default system shell is bash or Bourne Again SHell. Moving forward, the term "shell" will be instead of Terminal.
+
+## Display
+
+Using the "Applications" menu in the upper-left corner
+
+Applications --> Settings --> Display
+
+Update the Resolution from 800x600 to 1440x900, select the "Apply" button, "Keep this configuration" button, then "Close" button.
+
+## Desktop: Background
+
+First, let's create a place to save our pictures by opening a shell.
+
+```
+mkdir ~/Pictures
+cd Pictures
+```
+
+To download files from the Internet using a shell, "curl -O" is used; letter O not zero (0). You can copy and paste the commands below using ctrl+c to paste and the shell varition to paste using ctrl+shift+v.
+
+`curl -O https://wallpapersmug.com/download/1440x900/7a8c23/dragon-sea-monster-woman-art.jpg`
+
+Additional images to images to download.
+
+https://images.wallpaperscraft.com/image/dragon_classical_light_luster_surface_background_16050_1440x900.jpg
+
+http://wallpaperswebs.com/wp-content/uploads/Anime-Girl-Flying-on-a-Dragon-1440x900.jpg
+
+Close the shell.
+
+To use the new images,
+
+Applications --> Settings --> Desktop --> Background
+
+Select the "Folder" dropdown --> Other... --> Home --> zeth --> Pictures --> Open button
+
+The downloaded images in your Pictures directory are now available to select. When done, select the "Close" button.
+
+## Desktop: Icons
+
+Let's remove unneeded icons to unclutter are desktop.
+
+Applications --> Settings --> Desktop --> Icons tab
+
+Disable or uncheck each item under "Default Icons" the select the "Close" button. These can be renabled at any time.
+
+## Appearance
+
+Install packages
+
+`sudo pacman -S moka-icon-theme adobe-source-code-pro-fonts adobe-source-sans-pro-fonts`
+
+Navigate to Appearance
+
+Applications --> Settings --> Appearance
+	Style: Adwaita-dark
+	Icons: Moka
+	Fonts
+		Default Font: Source Sans Pro Regular 12
+		Default Monospace Font: Source Code Pro Regular 12
+	Select the "Close" button
+
+## Screensaver
+
+Select a screensaver.
+
+Application --> Settings --> Screensaver
+
+	Theme: Floating Xfce
+	Regard the computer idel after: 15 minutes
+	Select "Close" button
+	
+## Window Manager
+
+Applications --> Settings --> Windows Manager
+
+	Style
+		Theme: Cruxish
+		Title font: Source Sans Pro Regular 10
+		Title alignment: Left
+		Button layout: remove minimize and maxamize
+	Select the "Close" button
+
+## Window Manager
+
+Applications --> Settings --> Windows Manager Tweaks
+
+	Cycling: Enable "Cycle through windows in a list"
+	Compositor: Disable "Show shadows under dock windows"
+	Select the "Close" button
+
+## Panel
+
+With the removal of the Trash icon from the desktop, add a Trash applet on Panel to access Trash to recover deleted files or clearing items.
+
+Applications --> Settings --> Panel --> Items tab
+
+Items Tab
+	1. Select "+" button
+	1. Type "trash" in the Search box
+	1. Select "Trash Applet"
+	1. Select "Add" button
+	1. Use the up and down arrow button to place it above the Separator and Clock applet
+	1. Select the "Close" button
+	1. Done!
+
+Note: package gvfs must be installed using `sudo pacman -S gvfs`. If not installed, the applet will display a red icon with a exclamation mark!
+
+## Terminal
+
+Open a shell --> Edit --> Preferences
+
+	Appearance
+		Font: Source Code Pro Regular 12
+		Background
+			Change from "None" to "Transparent background"
+			Opacity: 0.65
+		Select the "Close" button
+
+## LightDM GTK+ Greeter Settings
+
+Applications --> Settings --> LightDM GTK+ Greeter Settings
+
+	Appearance
+		Theme: Adwaita-dark
+		Icons: Moka
+		Font: Source Sans Pro Regular 12
+		User image: disable
+	Select the "Save" button
+	Select the "Close" button

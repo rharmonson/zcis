@@ -1,0 +1,15 @@
+# Create an user account with administrator privileges
+
+```
+pacman -S sudo vi
+useradd -m zeth
+usermod -aG wheel zeth
+passwd zeth
+visudo
+```
+
+Remove the "# " for "# %wheel ALL=(ALL) ALL" then type `:wq` to save your changes.
+
+when complete, `reboot` and logon with zeth, then test sudo using `sudo ls /`.
+
+If the command doesn't return an error, you are done!

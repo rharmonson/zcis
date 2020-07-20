@@ -1,0 +1,29 @@
+Computer Information Science Terms:
+
+Central Processing Unit (CPU): the portion of a computer system that executes the instructions.
+
+Chipset: a group of integrated circuits or chips that are designed to work together.
+
+Computer: from the human computers who carried out calculations mentally or with mechanical aids, now replaced by electronic programmable computers.
+
+Graphics Processing Unit (GPU): a specialized processor unit designed to handle graphics operations.
+
+Input: data entered for processing.
+
+Input device: includes keyboard, mouse, touch screen, etc.
+
+Linux: an operating system kernel, and the common name for many of the operating systems which use it.
+
+Memory: synomym for volatile storage.
+
+Nerd: a colloquial term for a computer person, especially an obsessive, singularly focused one. Originally created by Dr. Seuss from his book If I Ran the Zoo.
+
+Non-volatile storage: is storage that has pemanance after a computer is powered off. Includes floppies, disk drives, Solid State Drives (SSD), USB flash drives, etc.
+
+Output: the results from a process.
+
+Output device: includes monitor, printer, speaker, etc.
+
+Storage: volatile and non-vailative storage is used by computers to store data to read or write data.
+
+Volatile storage: is storage that is lost when a computer is powered off. Random Access Memory (RAM) is an example of volatile storage.
