@@ -1,5 +1,7 @@
 Computer Information Science Terms:
 
+Bus: a bus or data base is used to transfer data between different computer components.
+
 Central Processing Unit (CPU): the portion of a computer system that executes the instructions.
 
 Chipset: a group of integrated circuits or chips that are designed to work together.
